@@ -1,3 +1,6 @@
+import { config } from "dotenv";
+config()
+
 import { FastifyInstance } from "fastify";
 import { PublishCommand } from '@aws-sdk/client-sns'
 import { snsClientInstance } from "../lib/sns";
@@ -17,7 +20,7 @@ export async function openSupportTicket(app: FastifyInstance) {
         const ticketData = ticketDataValidation.parse(request.body)
         
         const input = {
-            TopicArn: "arn:aws:sns:us-east-1:000000000000:ti-help-driver-sns",
+            TopicArn: process.env.TOPIC_ARN_SNS,
             Message: JSON.stringify(ticketData)
         }
 

@@ -1,3 +1,6 @@
+import { config } from "dotenv";
+config()
+
 import { FastifyInstance } from 'fastify'
 import { sqsClientInstance } from '../lib/sqs'
 import { ReceiveMessageCommand } from '@aws-sdk/client-sqs'
@@ -6,7 +9,7 @@ export const consumerMessage = async (app: FastifyInstance) => {
     app.get('/tickets', async (request, reply) => {
 
         const command = new ReceiveMessageCommand({
-            QueueUrl: "https://localhost.localstack.cloud:4566/000000000000/ti-help-driver-sqs",
+            QueueUrl: process.env.QUEUE_URL,
             MaxNumberOfMessages: 10
         })
 
@@ -17,9 +20,7 @@ export const consumerMessage = async (app: FastifyInstance) => {
                 return reply.status(204).send({ message: "Nothing tickets openned" })
 
             const messages = data.Messages
-            messages.forEach(message => {
-                return reply.status(200).send(JSON.parse(message.Body as string))
-            })
+            return reply.status(200).send(messages)
         } catch (e) {
             return reply.status(500).send(e)
         }
