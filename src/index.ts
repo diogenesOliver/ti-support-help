@@ -5,7 +5,7 @@ import { urlencoded } from 'body-parser'
 import { openSupportTicket } from './services/open-support-ticket'
 import { consumerMessage } from './consumer/consumer-sqs-message'
 
-export const app: FastifyInstance = fastify()
+const app: FastifyInstance = fastify()
 
 app.register(fastifyExpress)
     .after(() => {
@@ -14,3 +14,5 @@ app.register(fastifyExpress)
 
 app.register(openSupportTicket)
 app.register(consumerMessage)
+
+export = { app }
