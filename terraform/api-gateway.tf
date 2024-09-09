@@ -50,9 +50,9 @@ resource "aws_api_gateway_integration_response" "my_api_integration_response_200
 resource "aws_api_gateway_deployment" "my_api_deployment" {
   depends_on  = [aws_api_gateway_integration.my_api_integration]
   rest_api_id = aws_api_gateway_rest_api.ti-help-apigtw.id
-  stage_name  = "dev"
+  stage_name  = "prod"
 }
 
 output "api_url" {
-  value = "${aws_api_gateway_rest_api.ti-help-apigtw.execution_arn}/dev/localapi"
+  value = "${aws_api_gateway_rest_api.ti-help-apigtw.execution_arn}/prod/localapi"
 }
