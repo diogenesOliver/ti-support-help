@@ -1,5 +1,1 @@
-export enum TicketCode {
-    PerifericError       = "TCK-PP01",
-    SoftwareError        = "TCK-SFTW02",
-    OperationSystemError = "TCK-OS03"
-}
+export const tickerCode: Array<string> = ["TCK-PP01" || "TCK-SFTW02" || "TCK-OS03"]

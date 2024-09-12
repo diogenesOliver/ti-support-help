@@ -4,7 +4,7 @@ config()
 import { FastifyInstance } from "fastify";
 import { PublishCommand } from '@aws-sdk/client-sns'
 import { snsClientInstance } from "../lib/sns";
-import { TicketCode } from "../mock/ticket-code";
+import { tickerCode } from "../mock/ticket-code";
 import { z } from 'zod'
 
 export async function openSupportTicket(app: FastifyInstance) {
