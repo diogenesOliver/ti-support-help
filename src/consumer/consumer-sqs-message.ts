@@ -19,8 +19,8 @@ export const consumerMessage = async (app: FastifyInstance) => {
             if (!data.Messages || data.Messages.length === 0)
                 return reply.status(204).send({ message: "Nothing tickets openned" })
 
-            const bodyArray: void = data.Messages.forEach(async index => {
-                console.log( JSON.parse( index.Body as string ) )
+            data.Messages.forEach(async index => {
+                console.log(JSON.parse(index.Body as string))
             })
         } catch (e) {
             return reply.status(500).send(e)
