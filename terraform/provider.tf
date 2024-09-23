@@ -13,5 +13,6 @@ provider "aws" {
     iam        = var.localstack-endpoint
     sns        = var.localstack-endpoint
     apigateway = var.localstack-endpoint
+    dynamodb   = var.localstack-endpoint
   }
 }

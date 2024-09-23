@@ -10,14 +10,14 @@ resource "aws_cloudwatch_metric_alarm" "tickets-pending" {
   metric_name         = "ApproximateNumberOfMessagesVisible"
   namespace           = "AWS/SQS"
 
-  period              = "60"
-  statistic           = "Average"
-  threshold           = "10"
-  
-  alarm_description   = "Alarme quando a fila tiver mais de 10 mensagens visíveis"
-  
-  actions_enabled     = true
-  alarm_actions       = [aws_sns_topic.sqs_alarm_topic.arn]
+  period    = "60"
+  statistic = "Average"
+  threshold = "10"
+
+  alarm_description = "Alarme quando a fila tiver mais de 10 mensagens visíveis"
+
+  actions_enabled = true
+  alarm_actions   = [aws_sns_topic.sqs_alarm_topic.arn]
   dimensions = {
     QueueName = aws_sqs_queue.ti-help-driver-sqs.name
   }
