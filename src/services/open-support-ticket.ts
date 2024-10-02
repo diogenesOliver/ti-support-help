@@ -4,7 +4,8 @@ config()
 import { FastifyInstance } from "fastify";
 import { PublishCommand } from '@aws-sdk/client-sns'
 import { snsClientInstance } from "../lib/sns";
-import { tickerCode } from "../mock/ticket-code";
+import { insertTicketOnDataBase } from "./put-message-on-dynamoDB";
+
 import { z } from 'zod'
 
 export async function openSupportTicket(app: FastifyInstance) {
@@ -26,6 +27,8 @@ export async function openSupportTicket(app: FastifyInstance) {
 
         const command = new PublishCommand(input)
         await snsClientInstance.send(command)
+
+        insertTicketOnDataBase(JSON.stringify(ticketData))
 
         reply.status(200).send({
             message: "Succes to send ticket from TI",
