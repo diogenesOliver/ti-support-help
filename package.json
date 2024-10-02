@@ -17,6 +17,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.658.1",
     "@aws-sdk/client-sns": "^3.637.0",
     "@aws-sdk/client-sqs": "^3.637.0",
     "@fastify/express": "^3.0.0",
