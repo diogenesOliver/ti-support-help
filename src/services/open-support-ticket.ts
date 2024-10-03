@@ -7,6 +7,7 @@ import { snsClientInstance } from "../lib/sns";
 import { insertTicketOnDataBase } from "./put-message-on-dynamoDB";
 
 import { z } from 'zod'
+import { deleteSQSMessage } from "./delete-message-of-queue";
 
 export async function openSupportTicket(app: FastifyInstance) {
     app.post('/open/support/ticket', async (request, reply) => {
@@ -26,9 +27,12 @@ export async function openSupportTicket(app: FastifyInstance) {
         }
 
         const command = new PublishCommand(input)
-        await snsClientInstance.send(command)
+        const messageData = await snsClientInstance.send(command)
 
-        insertTicketOnDataBase(JSON.stringify(ticketData))
+        console.log( messageData )
+
+        await insertTicketOnDataBase(JSON.stringify(ticketData))
+        await deleteSQSMessage(messageData.MessageId as string)
 
         reply.status(200).send({
             message: "Succes to send ticket from TI",
