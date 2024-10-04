@@ -32,7 +32,7 @@ export async function openSupportTicket(app: FastifyInstance) {
         console.log( messageData )
 
         await insertTicketOnDataBase(JSON.stringify(ticketData))
-        await deleteSQSMessage(messageData.MessageId as string)
+        //await deleteSQSMessage(messageData.MessageId as string) There is a problem with this with MessageID
 
         reply.status(200).send({
             message: "Succes to send ticket from TI",
