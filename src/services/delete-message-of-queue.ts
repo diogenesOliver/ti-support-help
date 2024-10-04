@@ -11,7 +11,5 @@ export async function deleteSQSMessage(receiptHandle){
     }
 
     const command = new DeleteMessageCommand(input)
-    await sqsClientInstance.send(command)
-
-    console.log( 'Success to delete message...' )
+    return await sqsClientInstance.send(command)
 }
