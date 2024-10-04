@@ -4,6 +4,7 @@ config()
 import { FastifyInstance } from 'fastify'
 import { sqsClientInstance } from '../lib/sqs'
 import { ReceiveMessageCommand } from '@aws-sdk/client-sqs'
+import { deleteSQSMessage } from "../services/delete-message-of-queue";
 
 export const consumerMessage = async (app: FastifyInstance) => {
     app.get('/tickets', async (request, reply) => {
@@ -15,6 +16,10 @@ export const consumerMessage = async (app: FastifyInstance) => {
 
         try {
             const data = await sqsClientInstance.send(command)
+
+            data.Messages?.forEach(index => {
+                deleteSQSMessage(index.ReceiptHandle)
+            })
 
             if (!data.Messages || data.Messages.length === 0)
                 return reply.status(204).send({ message: "Nothing tickets openned" })
