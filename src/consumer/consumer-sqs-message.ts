@@ -2,7 +2,9 @@ import { config } from "dotenv";
 config()
 
 import { FastifyInstance } from 'fastify'
+
 import { getMessages } from "./get-item-command";
+import { listDeadLetterSourceQueues } from "./list-ddl- queue";
 
 export const consumerMessage = async (app: FastifyInstance) => {
     app.get('/tickets', async (request, reply) => {
@@ -10,6 +12,10 @@ export const consumerMessage = async (app: FastifyInstance) => {
 
         if(getTicketDataFromDynamoDB?.length === 0)
             return reply.status(100).send({ message: "Messages not found" })
+
+        const sqsDDL = (await listDeadLetterSourceQueues()).queueUrls
+        if(sqsDDL === undefined || sqsDDL?.length > 0)            
+            return reply.status(101).send( { message: "MESSAGE PROBLEM", info: sqsDDL } )
 
         return reply.status(200).send( getTicketDataFromDynamoDB )
     })
