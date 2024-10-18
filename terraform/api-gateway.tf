@@ -12,7 +12,7 @@ resource "aws_api_gateway_rest_api" "tickets-apigtw" {
             httpMethod           = "GET"
             payloadFormatVersion = "1.0"
             type                 = "HTTP_PROXY"
-            uri                  = "https://b57a-200-36-217-213.ngrok-free.app/tickets"
+            uri                  = "${var.url-ngrok}"
           }
         }
       }
