@@ -1,3 +1,3 @@
-resource "aws_s3_bucket" "bucket-logs" {
-    bucket = "bucket-cloudwatch-logs"
-}
+/*resource "aws_s3_bucket" "bucket-logs" {
+  bucket = "bucket-cloudwatch-logs"
+}*/
