@@ -7,3 +7,5 @@ node_modules
 api-http.http
 
 .env
+
+ngrok_debug.log
