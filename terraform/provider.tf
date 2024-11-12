@@ -14,6 +14,6 @@ provider "aws" {
     sns        = var.localstack-endpoint
     apigateway = var.localstack-endpoint
     dynamodb   = var.localstack-endpoint
-    s3         = var.localstack-endpoint
+    s3         = "http://s3.localhost.localstack.cloud:4566"
   }
 }
