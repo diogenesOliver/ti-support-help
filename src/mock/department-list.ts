@@ -1,1 +1,1 @@
-export const departament: Array<string> = ["RECEPÇÃO" || "OPERAÇÃO" || "DIREÇÃO" || "RECURSOS HUMANOS"]
+export const departament: Array<string> = ["RECEPÇÃO", "OPERAÇÃO", "DIREÇÃO", "RECURSOS HUMANOS"]
