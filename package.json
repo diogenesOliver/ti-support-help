@@ -25,6 +25,7 @@
     "@fastify/express": "^3.0.0",
     "body-parser": "^1.20.2",
     "fastify": "^4.28.1",
+    "morgan": "^1.10.0",
     "zod": "^3.23.8"
   }
 }
