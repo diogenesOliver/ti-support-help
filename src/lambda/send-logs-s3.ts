@@ -21,8 +21,8 @@ export const uploadLogsFileToS3 = async (app:FastifyInstance) => {
             return await bucketS3Instance.send(command)
         }
 
-        const joinPath = path.join(__dirname, "../../ngrok_debug.log")
-        const getMetadataReturnFunction = await uploadLogs("bucket-logs", joinPath, "uploads/logs/ngrok-logs.txt")
+        const joinPath = path.join(__dirname, "../../access.log")
+        const getMetadataReturnFunction = await uploadLogs("bucket-logs", joinPath, "uploads/logs/morgan-logs.txt")
 
         return reply.status(201).send({
             message: "Succesfuly upload",
