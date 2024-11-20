@@ -22,7 +22,3 @@ variable "project-name" {
   type    = string
   default = "ti-help-driver"
 }
-
-variable "url-ngrok" {
-  type = string
-}
