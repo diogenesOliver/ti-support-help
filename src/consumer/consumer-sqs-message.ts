@@ -4,7 +4,7 @@ config()
 import { FastifyInstance } from 'fastify'
 
 import { getMessages } from "./get-item-command";
-import { listDeadLetterSourceQueues } from "./list-ddl- queue";
+import { listDeadLetterSourceQueues } from "./list-ddl-queue";
 
 export const consumerMessage = async (app: FastifyInstance) => {
     app.get('/tickets', async (request, reply) => {
