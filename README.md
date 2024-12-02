@@ -7,4 +7,4 @@ A aplicação poderia ser desenvolvida facilmente sem nada relacionado a Cloud, 
 
 ***FLUXO DA APLICAÇÃO***
 
-<img src="fluxo-of-application-v4.png"/>
+<img src="fluxo-of-application-v5.png"/>
