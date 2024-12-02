@@ -17,8 +17,8 @@ plugins:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: main.openticket
     events:
       - http:
-          path: hello
-          method: get
+          method: POST
+          path: /open/ticket
