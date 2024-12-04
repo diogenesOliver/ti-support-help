@@ -6,7 +6,7 @@ import path from "path"
 import { FastifyInstance } from "fastify";
 
 export const uploadLogsFileToS3 = async (app:FastifyInstance) => {
-    app.get('/ngrok/send/logs', async (request, reply) => {
+    app.get('/send/logs', async (request, reply) => {
         
         async function uploadLogs(buckerName: string, filePath: string, key: string){
             const fileContent = fs.readFileSync(filePath)

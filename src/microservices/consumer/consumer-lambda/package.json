@@ -1,0 +1,19 @@
+{
+  "name": "consumer-lambda",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "sls deploy --stage dev",
+    "invoke": "aws lambda invoke --function-name consumer-lambda-dev-hello --endpoint-url=http://localhost:4566 --payload '{}' response.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-lambda": "^3.699.0"
+  },
+  "devDependencies": {
+    "serverless-localstack": "^1.3.1"
+  }
+}
