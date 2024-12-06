@@ -3,14 +3,14 @@ const { PublishCommand } = require('@aws-sdk/client-sns')
 
 exports.openticket = async (event) => {
 
-  const ticketDataBody = JSON.stringify(event.body)
-  const input = {
-    TopicArn: "arn:aws:sns:us-east-1:000000000000:ti-help-driver-sns",
-    Message: ticketDataBody
-  }
+  /*const { message } = JSON.parse(event.body)
 
-  const command = new PublishCommand(input)
-  await snsClient.send(command)
+  const command = new PublishCommand({
+    Message: message,
+    TopicArn: "arn:aws:sns:us-east-1:000000000000:ti-help-driver-sns"
+  })
+
+  await snsClient.send(command)*/
 
   return {
     statusCode: 200,
