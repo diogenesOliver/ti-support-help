@@ -1,0 +1,33 @@
+org: local390390
+app: callit-producer-lambda
+service: producer-lambda
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  endpoint: http://localhost:4566
+  endpointType: EDGE
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sns:Publish
+      Resource:
+        - arn:aws:sns:us-east-1:000000000000:ti-help-driver-sns
+
+custom:
+  localstack:
+    stages:
+      - dev
+
+plugins:
+  - serverless-localstack
+
+functions:
+  openticket:
+    handler: main.openticket
+    events:
+      - http:
+          path: /open/ticket
+          method: ANY
+          cors: true
+    
