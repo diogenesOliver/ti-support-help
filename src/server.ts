@@ -1,7 +1,7 @@
 import { config } from "dotenv"
 config()
 
-import { app } from "."
+import app from "."
 
 const SERVER_PORT = 3333
 

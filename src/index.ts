@@ -21,4 +21,4 @@ app.register(openSupportTicket)
 app.register(consumerMessage)
 app.register(uploadLogsFileToS3)
 
-export = { app }
+export = app
