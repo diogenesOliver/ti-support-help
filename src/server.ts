@@ -3,12 +3,17 @@ config()
 
 import app from "."
 
-const SERVER_PORT = 3333
+const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 3333
 
-const setup = async () => {
-    app.listen({ port: SERVER_PORT }).then(res => {
-        console.log(`Server running: ${res}`)
-    })
+const InitServer = async() => {
+    try {
+        await app.listen({port: SERVER_PORT}).then(res => {
+            console.log(`✅ Server is running ${res}`)
+        })
+    }catch(error){
+        console.log(`❌ Failed to initilize server`, error)
+        process.exit(1)
+    }
 }
 
-setup()
+InitServer()
