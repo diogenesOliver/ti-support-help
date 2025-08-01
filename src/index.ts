@@ -5,12 +5,11 @@ import { openSupportTicket } from './services/open-support-ticket'
 import { consumerMessage } from './consumer/consumer-sqs-message'
 import { uploadLogsFileToS3 } from "./lambda/send-logs-s3";
 
+const app: FastifyInstance = fastify()
 
-const app: FastifyInstance = fastify({
-    logger: true
-})
-
-app.register(import("@fastify/formbody"))
+app.register(
+    import("@fastify/formbody")
+)
 
 app.register(openSupportTicket)
 app.register(consumerMessage)
