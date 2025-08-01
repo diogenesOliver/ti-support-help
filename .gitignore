@@ -4,8 +4,6 @@ node_modules
 /terraform/.terraform.*
 /terraform/terraform.*
 
-api-http.http
-
 .env
 
 access.log

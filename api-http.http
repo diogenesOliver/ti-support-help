@@ -1,0 +1,15 @@
+@baseURL= https://d92d46d97401.ngrok-free.app
+
+POST {{baseURL}}/open/support/ticket
+Content-Type: application/json
+
+{
+    "ticket_code": "SIMPECDE00",
+    "ticket_desc": "Simple Decription",
+    "employeed_email": "diogenes.riboliveira@gmail.com",
+    "employeed_name": "Diógee Ribiro de Oliveira00",
+    "lead": "Diogenes Ribeio d Oliveira"
+}
+
+###
+GET {{baseURL}}/tickets
