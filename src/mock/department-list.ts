@@ -1,1 +1,0 @@
-export const departament: Array<string> = ["RECEPÇÃO", "OPERAÇÃO", "DIREÇÃO", "RECURSOS HUMANOS"]

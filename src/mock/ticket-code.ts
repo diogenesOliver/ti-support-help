@@ -1,1 +1,0 @@
-export const tickerCode: Array<string> = ["TCK-PP01", "TCK-SFTW02", "TCK-OS03"]
