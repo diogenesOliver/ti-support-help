@@ -4,6 +4,6 @@ config()
 import { SNSClient } from '@aws-sdk/client-sns'
 
 export const snsClientInstance = new SNSClient({
-    region: "us-east-1",
+    region: process.env.AWS_REGION as string,
     endpoint: process.env.ENDPOINT_URL as string, 
 })
