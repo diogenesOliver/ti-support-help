@@ -7,7 +7,7 @@ import { listDeadLetterSourceQueues } from "../consumer/list-ddl- queue";
 import { FastifyInstance } from 'fastify'
 
 export const consumerMessage = async (app: FastifyInstance) => {
-    app.get('/tickets', async (request, reply) => {
+    app.get('/tickets/v1', async (request, reply) => {
         const getTicketDataFromDynamoDB = await getMessages()
 
         if (getTicketDataFromDynamoDB?.length === 0)

@@ -3,20 +3,15 @@ config()
 
 import { snsClientInstance } from "../lib/sns";
 import { insertTicketOnDataBase } from "../services/put-message-on-dynamoDB";
+import { Domain_Ticket_Data } from "../domain/ApplicationDomainLayer";
 
 import { FastifyInstance } from "fastify";
 import { PublishCommand } from '@aws-sdk/client-sns'
 import { z } from 'zod'
 
 export async function openSupportTicket(app: FastifyInstance) {
-    app.post('/open/support/ticket', async (request, reply) => {
-        const ticketDataValidation = z.object({
-            ticket_code: z.string(),
-            ticket_desc: z.string(),
-            employeed_email: z.string(),
-            employeed_name: z.string(),
-            lead: z.string()
-        })
+    app.post('/open/ticket/v1', async (request, reply) => {
+        const ticketDataValidation = z.object(Domain_Ticket_Data)
 
         const ticketData = ticketDataValidation.parse(request.body)
         
