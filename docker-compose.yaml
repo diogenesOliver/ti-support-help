@@ -12,3 +12,9 @@ services:
     container_name: localstack
     ports:
       - "4566:4566"
+
+  kafka:
+    image: apache/kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092"
