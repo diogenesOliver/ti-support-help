@@ -10,3 +10,11 @@ export const Domain_Company_Data = {
     corporate_street: z.string(),
     corporate_website_link: z.string()
 }
+
+export const Domain_Ticket_Data = {
+    ticket_code: z.string(),
+    ticket_desc: z.string(),
+    employeed_email: z.string(),
+    employeed_name: z.string(),
+    lead: z.string()
+}
