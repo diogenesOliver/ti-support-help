@@ -2,7 +2,7 @@ import { config } from "dotenv";
 config()
 
 import { snsClientInstance } from "../lib/sns";
-import { insertTicketOnDataBase } from "../services/put-message-on-dynamoDB";
+import { saveOnDataBaseInstance } from "../db/SaveOnDataBaseInstance";
 import { Domain_Ticket_Data } from "../domain/ApplicationDomainLayer";
 
 import { FastifyInstance } from "fastify";
@@ -23,7 +23,7 @@ export async function openSupportTicket(app: FastifyInstance) {
         const command = new PublishCommand(input)
         await snsClientInstance.send(command)
 
-        await insertTicketOnDataBase(JSON.stringify(ticketData))
+        await saveOnDataBaseInstance(JSON.stringify(ticketData), "MessageSupport", "TicketSupport")
 
         reply.status(200).send({
             message: "Succes to send ticket from TI",
