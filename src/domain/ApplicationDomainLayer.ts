@@ -8,7 +8,8 @@ export const Domain_Company_Data = {
     corporate_state: z.string(),
     corporate_city: z.string(),
     corporate_street: z.string(),
-    corporate_website_link: z.string()
+    corporate_website_link: z.string(),
+    corporate_token: z.string().nullable().optional()
 }
 
 export const Domain_Ticket_Data = {
