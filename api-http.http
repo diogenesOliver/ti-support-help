@@ -1,10 +1,10 @@
-@baseURL= https://d92d46d97401.ngrok-free.app
+@baseURL= https://30c2a0925f25.ngrok-free.app
 
-POST {{baseURL}}/open/support/ticket
+POST {{baseURL}}/open/ticket/v1
 Content-Type: application/json
 
 {
-    "ticket_code": "SIMPECDE00",
+    "ticket_code": "OTHERIMAGE",
     "ticket_desc": "Simple Decription",
     "employeed_email": "diogenes.riboliveira@gmail.com",
     "employeed_name": "Diógee Ribiro de Oliveira00",
@@ -12,4 +12,19 @@ Content-Type: application/json
 }
 
 ###
-GET {{baseURL}}/tickets
+GET {{baseURL}}/tickets/v1
+
+###
+POST {{baseURL}}/company/registration/v1
+Content-Type: application/json
+
+{
+    "corporate_reason": "Empresa de Teste - LTDA",
+    "corporate_CNPJ": "12.345.678/0001-95",
+    "corporate_email": "empresateste@gmail.com",
+    "corporate_country": "Brazil",
+    "corporate_state": "Rio Grande do Sul",
+    "corporate_city": "Porto Alegre",
+    "corporate_street": "Gildo de Freitas",
+    "corporate_website_link": "https://7b37c3cac68a.ngrok-free.app"
+}
