@@ -2,6 +2,7 @@ import fastify, { FastifyInstance } from "fastify";
 
 import { openSupportTicket } from './use_cases/open-support-ticket'
 import { consumerMessage } from './use_cases/consumer-sqs-message'
+import { companyRegistration } from "./use_cases/company-registration";
 
 const app: FastifyInstance = fastify()
 
@@ -11,5 +12,6 @@ app.register(
 
 app.register(openSupportTicket)
 app.register(consumerMessage)
+app.register(companyRegistration)
 
 export = app
