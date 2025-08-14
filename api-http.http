@@ -1,4 +1,4 @@
-@baseURL= https://30c2a0925f25.ngrok-free.app
+@baseURL= http://127.0.0.1:3333
 
 POST {{baseURL}}/open/ticket/v1
 Content-Type: application/json
