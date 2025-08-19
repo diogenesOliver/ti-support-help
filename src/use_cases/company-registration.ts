@@ -28,8 +28,14 @@ export async function companyRegistration(app: FastifyInstance){
             })
 
             await producer.disconnect()
-
             generateTokenConsumer()
+
+            reply.status(200).send({
+                message: {
+                    srtingMessage: `Validation TOKEN sended from company email: ${companyData.corporate_email}`
+                }
+            })
+
         }catch(e){
             console.log(`Kafka producer ERROR - ${e}`)
         }
