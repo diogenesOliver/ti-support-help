@@ -17,9 +17,10 @@ export async function generateTokenConsumer(){
         await consumer.run({
             eachMessage: async ({ topic, partition, message, heartbeat }) => {
 
-                console.log({
-                    value: message.value?.toString()
-                })
+                /* 
+                    Aplicar lógica para envio de token para email 
+                */
+
                 await heartbeat()
             }
         })

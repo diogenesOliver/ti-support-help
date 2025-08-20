@@ -32,7 +32,8 @@ export async function companyRegistration(app: FastifyInstance){
 
             reply.status(200).send({
                 message: {
-                    srtingMessage: `Validation TOKEN sended from company email: ${companyData.corporate_email}`
+                    srtingMessage: `Validation TOKEN sended from company email: ${companyData.corporate_email}`,
+                    status: 200
                 }
             })
 
