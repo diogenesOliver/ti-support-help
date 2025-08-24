@@ -13,6 +13,7 @@ export async function companyRegistration(app: FastifyInstance){
     app.post('/company/registration/v1', async (request, reply) => {
         const companyDataValidation = z.object(Domain_Company_Data)
         const companyData = companyDataValidation.parse(request.body)
+        const companyEmail = companyData.corporate_email as string
 
         try {
             const producer = KafkaInstance.producer()
@@ -22,7 +23,7 @@ export async function companyRegistration(app: FastifyInstance){
                 topic: "topic-test",
                 messages: [
                     {
-                        value: JSON.stringify(companyData) as string
+                        value: JSON.stringify(companyEmail)
                     }
                 ]
             })
@@ -32,7 +33,7 @@ export async function companyRegistration(app: FastifyInstance){
 
             reply.status(200).send({
                 message: {
-                    srtingMessage: `Validation TOKEN sended from company email: ${companyData.corporate_email}`,
+                    srtingMessage: `Validation TOKEN sended from company email: ${companyEmail}`,
                     status: 200
                 }
             })
