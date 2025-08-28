@@ -27,7 +27,7 @@ export async function companyRegistration(app: FastifyInstance){
                     }
                 ]
             })
-
+             
             await producer.disconnect()
             generateTokenConsumer()
 
@@ -37,6 +37,9 @@ export async function companyRegistration(app: FastifyInstance){
                     status: 200
                 }
             })
+
+            console.log("INSERIDO NO BANCO DE DADOS")
+            await saveOnDataBaseInstance(JSON.stringify(companyData), "Company", "CompanyRegistred")
 
         }catch(e){
             console.log(`Kafka producer ERROR - ${e}`)
