@@ -21,6 +21,7 @@ export async function generateTokenConsumer(){
                     Aplicar lógica para envio de token para email 
                 */
 
+                console.log({ TOKEN })
                 await heartbeat()
             }
         })
