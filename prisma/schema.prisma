@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -11,7 +11,7 @@ datasource db {
 model Company {
   id                     String  @id @default(uuid())
   corporate_reason       String
-  corporate_CNPJ         Int     @unique
+  corporate_CNPJ         String  @unique
   corporate_email        String  @unique
   corporate_country      String
   corporate_state        String
@@ -19,4 +19,6 @@ model Company {
   corporate_street       String
   corporate_website_link String?
   corporate_token        String?
+
+  @@map("company")
 }
