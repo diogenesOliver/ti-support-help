@@ -22,3 +22,15 @@ model Company {
 
   @@map("company")
 }
+
+model Ticket {
+  id              String  @id @default(uuid())
+  ticket_code     String
+  ticket_desc     String  @db.VarChar(255)
+  ticket_foto     String? @db.VarChar(500)
+  employeed_email String
+  employeed_name  String
+  lead            String
+
+  @@map("ticket")
+}
