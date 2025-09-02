@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-const prismaClient = new PrismaClient()
+import { prismaClient } from "../PrismaInstance"
 
 export async function insertQuerie(tableName: string, data){
     try{
