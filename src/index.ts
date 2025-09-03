@@ -1,7 +1,7 @@
 import fastify, { FastifyInstance } from "fastify";
 
 import { openSupportTicket } from './use_cases/open-support-ticket'
-import { consumerMessage } from './use_cases/consumer-sqs-message'
+import { consumerMessage } from './use_cases/get-tickets'
 import { companyRegistration } from "./use_cases/company-registration";
 
 const app: FastifyInstance = fastify()

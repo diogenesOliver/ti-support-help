@@ -1,9 +1,26 @@
+# Node_Modules
+
 node_modules
+
+# Terraform Files
 
 /terraform/.terraform
 /terraform/.terraform.*
 /terraform/terraform.*
 
+# Environments
+
 .env
 
+# Prisma Files
+
 access.log
+/generated
+
+# ================== Remover em caso de deploy ================== #
+/prisma/migrations
+# ================== Remover em caso de deploy ================== #
+
+# Docker
+
+/container

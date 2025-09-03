@@ -1,0 +1,36 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id                     String  @id @default(uuid())
+  corporate_reason       String
+  corporate_CNPJ         String  @unique
+  corporate_email        String  @unique
+  corporate_country      String
+  corporate_state        String
+  corporate_city         String
+  corporate_street       String
+  corporate_website_link String?
+  corporate_token        String?
+
+  @@map("company")
+}
+
+model Ticket {
+  id              String  @id @default(uuid())
+  ticket_code     String
+  ticket_desc     String  @db.VarChar(255)
+  ticket_foto     String? @db.VarChar(500)
+  employeed_email String
+  employeed_name  String
+  lead            String
+
+  @@map("ticket")
+}
