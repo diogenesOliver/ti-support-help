@@ -7,7 +7,7 @@ import { KafkaInstance } from "../lib/kafka";
 import { generateTokenConsumer } from "../consumer/kafka_consumer/generate_token_consumer";
 
 import { FastifyInstance } from "fastify";
-import { z } from "zod"
+import { string, z } from "zod"
 
 export async function companyRegistration(app: FastifyInstance){
     app.post('/company/registration/v1', async (request, reply) => {
@@ -26,7 +26,19 @@ export async function companyRegistration(app: FastifyInstance){
                     }
                 ]
             })
-             
+
+            const registrationCoorporate = await insertQuerie("company", companyData)
+            if (registrationCoorporate == undefined){
+                reply.status(404).send({
+                        message: {
+                            string: "[ERROR] - Company email or CNPJ already registered",
+                            statusCode: 404
+                        }
+                    })
+
+                return
+            }
+
             await producer.disconnect()
             generateTokenConsumer()
 
@@ -36,9 +48,6 @@ export async function companyRegistration(app: FastifyInstance){
                     status: 200
                 }
             })
-
-            await insertQuerie("company", companyData)
-            console.log("INSERIDO NO BANCO DE DADOS")
 
         }catch(e){
             console.log(`Kafka producer ERROR - ${e}`)
