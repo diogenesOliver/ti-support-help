@@ -19,13 +19,12 @@ export const consumerMessage = async (app: FastifyInstance) => {
             })
         
         }catch(e){
-           
             reply.status(404).send({
-                message: "[ERROR] - Error 404 on route /tickets/v1",
+                error: "[ERROR] - Error 404 on route /tickets/v1",
                 statusCode: 404
             })
         
-            console.error(`[/tickets/v1] - ${e}`)
+            console.error(`[ROUTE - /tickets/v1] - ${e}`)
         }
     })
 }

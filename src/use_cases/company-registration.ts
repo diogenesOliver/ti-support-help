@@ -43,14 +43,17 @@ export async function companyRegistration(app: FastifyInstance){
             generateTokenConsumer()
 
             reply.status(200).send({
-                message: {
-                    srtingMessage: `Validation TOKEN sended from company email: ${companyData.corporate_email as string}`,
-                    status: 200
-                }
+                message: `Validation TOKEN sended from company email: ${companyData.corporate_email as string}`,
+                statusCode: 200
             })
 
         }catch(e){
-            console.log(`Kafka producer ERROR - ${e}`)
+            reply.status(500).send({
+                error: `Internal error on server! Try again for a few minutes`,
+                statusCode: 500
+            })
+
+            console.error(`[ROUTE - /company/registration/v1] - ${e}`)
         }
     })
 }
