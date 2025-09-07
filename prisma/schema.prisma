@@ -20,6 +20,11 @@ model Company {
   corporate_website_link String?
   corporate_token        String?
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Collaborator Collaborator[]
+
   @@map("company")
 }
 
@@ -32,5 +37,29 @@ model Ticket {
   employeed_name  String
   lead            String
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  collaborator   Collaborator @relation(fields: [collaboratorId], references: [id])
+  collaboratorId String
+
   @@map("ticket")
+}
+
+model Collaborator {
+  id           String @id @default(uuid())
+  colab_name   String
+  colab_email  String
+  colab_lead   String
+  colab_sector String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId String
+  
+  Ticket    Ticket[]
+
+  @@map("collaborator")
 }
