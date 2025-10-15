@@ -18,15 +18,6 @@ export async function companyRegistration(app: FastifyInstance){
             const producer = KafkaInstance.producer()
             await producer.connect()
 
-            await producer.send({
-                topic: "topic-test",
-                messages: [
-                    {
-                        value: JSON.stringify(companyData.corporate_email as string)
-                    }
-                ]
-            })
-
             const registrationCoorporate = await insertQuerie("company", companyData)
             if (registrationCoorporate == undefined){
                 reply.status(404).send({
@@ -38,6 +29,15 @@ export async function companyRegistration(app: FastifyInstance){
 
                 return
             }
+
+            await producer.send({
+                topic: "topic-test",
+                messages: [
+                    {
+                        value: JSON.stringify(companyData.corporate_email as string)
+                    }
+                ]
+            })
 
             await producer.disconnect()
             generateTokenConsumer()
