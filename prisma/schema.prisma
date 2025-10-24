@@ -23,7 +23,8 @@ model Company {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Collaborator Collaborator[]
+  collaborator Collaborator[]
+  tickets      Ticket[]
 
   @@map("company")
 }
@@ -43,6 +44,9 @@ model Ticket {
   collaborator   Collaborator @relation(fields: [collaboratorId], references: [id])
   collaboratorId String
 
+  Company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+
   @@map("ticket")
 }
 
@@ -56,10 +60,10 @@ model Collaborator {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  company   Company  @relation(fields: [companyId], references: [id])
-  companyId String
-  
-  Ticket    Ticket[]
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+
+  Ticket Ticket[]
 
   @@map("collaborator")
 }
