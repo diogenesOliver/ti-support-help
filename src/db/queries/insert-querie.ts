@@ -1,9 +1,18 @@
 import { prismaClient } from "../PrismaInstance"
 
-export async function insertQuerie(tableName: string, data){
+type UrlParamIdTyping = string | undefined
+
+export async function insertQuerie(tableName: string, data: object, paramUrlId?: UrlParamIdTyping): Promise<object | undefined> {
     try{
+        if(paramUrlId == undefined){
+            await prismaClient[tableName].create({
+                data: data
+            })
+            return data
+        }
+
         await prismaClient[tableName].create({
-            data: data
+            data: { ...data }
         })
 
         return data
