@@ -19,3 +19,10 @@ export const Domain_Ticket_Data = {
     employeed_name: z.string(),
     lead: z.string()
 }
+
+export const Domain_Collaborator_Data = {
+    colab_name: z.string(),
+    colab_email: z.string(),
+    colab_lead: z.string(),
+    colab_sector: z.string()
+}
