@@ -1,17 +1,20 @@
-import { findQuerie } from "../db/queries/find-querie";
+import { findQuerie } from "../db/queries/find-querie"
+
+import { z } from 'zod'
 import { FastifyInstance } from 'fastify'
 
 export const consumerMessage = async (app: FastifyInstance) => {
-    app.get('/tickets/v1', async (request, reply) => {
+    app.get('/company/tickets/:id/v1', async (request, reply) => {
         try{
 
-            /* 
-                Fazer a relação dos tickets criados com usuários que
-                criaram e posteriorimente com os colaboradores que 
-                foram responsáveis pelo ticket
-            */
-
-            const tickets = await findQuerie("ticket")
+            const paramsValidation = z.object({ id: z.string().uuid() }) 
+            const { id } = paramsValidation.parse(request.params)
+            
+            const tickets = await findQuerie("colaborator", id)
+            if(tickets == undefined) return reply.status(404).send({
+                error: "[ERROR] - Error 404 on route /tickets/v1",
+                statusCode: 404
+            })
 
             reply.status(200).send({
                 data: tickets,
@@ -19,11 +22,6 @@ export const consumerMessage = async (app: FastifyInstance) => {
             })
         
         }catch(e){
-            reply.status(404).send({
-                error: "[ERROR] - Error 404 on route /tickets/v1",
-                statusCode: 404
-            })
-        
             console.error(`[ROUTE - /tickets/v1] - ${e}`)
         }
     })

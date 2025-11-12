@@ -14,7 +14,15 @@ export async function associatedCollaborator(app: FastifyInstance){
             const paramsValidation = z.object({ id: z.string().uuid() }) 
             const { id } = paramsValidation.parse(request.params)
             
-            await insertQuerie("collaborator", collaboratorData, id)
+            const querie = await insertQuerie("collaborator", collaboratorData, "company", id)
+            if(querie == undefined){
+                reply.status(500).send({
+                    error: "Internal server error",
+                    statusCode: 500
+                })
+            
+                return
+            }
 
             reply.status(201).send({
                 message: "Assigned collaborator succesfully",
@@ -30,12 +38,6 @@ export async function associatedCollaborator(app: FastifyInstance){
             
                 return
             }
-
-            reply.status(500).send({
-                error: `Internal error on server! Try again for a few minutes`,
-                statusCode: 500
-            })
-
             console.log(`[ROUTE - /associate/collaborator/:id/v1] - ${e}`)
         }
     })
