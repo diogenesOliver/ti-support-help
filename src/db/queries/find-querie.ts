@@ -2,9 +2,9 @@ import { prismaClient } from "../PrismaInstance"
 
 type ArgumentsType = string | undefined
 
-export async function findQuerie(tableName: string, primaryArgument?: ArgumentsType, secondArgument?: ArgumentsType){
+export async function findQuerie(tableName: string, uuidParams?: ArgumentsType){
     try{
-        if(primaryArgument == undefined || secondArgument == undefined){
+        if(uuidParams == undefined){
             const results = await prismaClient[
                 tableName
             ].findMany()
@@ -13,14 +13,12 @@ export async function findQuerie(tableName: string, primaryArgument?: ArgumentsT
         }
 
         const results = await prismaClient[tableName].findMany({
-                include: {
-                    primaryArgument,
-                    secondArgument
-                }
+                where: { id: uuidParams }
             })
 
         return results
     }catch(e){
         console.error(`[ERROR] - FIND QUERIE ERROR: ${e}`)
+        return undefined
     }
 }
