@@ -24,30 +24,8 @@ model Company {
   updatedAt DateTime @updatedAt
 
   collaborator Collaborator[]
-  tickets      Ticket[]
 
   @@map("company")
-}
-
-model Ticket {
-  id              String  @id @default(uuid())
-  ticket_code     String
-  ticket_desc     String  @db.VarChar(255)
-  ticket_foto     String? @db.VarChar(500)
-  employeed_email String
-  employeed_name  String
-  lead            String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  collaborator   Collaborator @relation(fields: [collaboratorId], references: [id])
-  collaboratorId String
-
-  company   Company @relation(fields: [companyId], references: [id])
-  companyId String
-
-  @@map("ticket")
 }
 
 model Collaborator {
@@ -66,4 +44,22 @@ model Collaborator {
   Ticket Ticket[]
 
   @@map("collaborator")
+}
+
+model Ticket {
+  id              String  @id @default(uuid())
+  ticket_code     String
+  ticket_desc     String  @db.VarChar(255)
+  ticket_foto     String? @db.VarChar(500)
+  employeed_email String
+  employeed_name  String
+  lead            String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  collaborator   Collaborator @relation(fields: [collaboratorId], references: [id])
+  collaboratorId String
+
+  @@map("ticket")
 }
