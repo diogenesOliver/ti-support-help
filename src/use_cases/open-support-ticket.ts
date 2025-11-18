@@ -5,29 +5,29 @@ import { FastifyInstance } from "fastify";
 import { z } from 'zod'
 
 export async function openSupportTicket(app: FastifyInstance) {
-    app.post('/open/ticket/v1', async (request, reply) => {
+    app.post('/open/ticket/:id/v1', async (request, reply) => {
         try{
             const ticketDataValidation = z.object(Domain_Ticket_Data)
             const ticketData = ticketDataValidation.parse(request.body)
 
-            /* 
-                Aplicar lógica com infraestrutura AWS e Terraform
-                                    OU
-                Aplicar lógica com Kafka para enviar os dados para um consumer
-            */
+            const paramsValidation = z.object({ id: z.string().uuid() })
+            const { id } = paramsValidation.parse(request.params)
 
-            await insertQuerie("ticket", ticketData)
+            const querie = await insertQuerie("ticket", ticketData, "collaborator", id)
+            if(querie == undefined){
+                reply.status(500).send({
+                    error: "Internal error on server! Try again for a few minutes",
+                    statusCode: 500
+                })
+
+                return
+            }
 
             reply.status(201).send({
                 message: "[INFO] - Ticket created successfully",
                 statusCode: 201
             })
         }catch(e){
-            reply.status(500).send({
-                error: "Internal error on server! Try again for a few minutes",
-                statusCode: 500
-            })
-
             console.error(`[ROUTE - /open/ticket/v1] - ${e}`)
         }
     })
