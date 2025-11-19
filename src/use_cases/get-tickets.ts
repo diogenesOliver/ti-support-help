@@ -11,10 +11,14 @@ export const consumerMessage = async (app: FastifyInstance) => {
             const { id } = paramsValidation.parse(request.params)
             
             const tickets = await findQuerie("collaborator", id)
-            if(tickets == undefined) return reply.status(404).send({
-                error: "[ERROR] - Error 404 on route /tickets/v1",
-                statusCode: 404
-            })
+            if(tickets == undefined){
+                reply.status(404).send({
+                    error: "[ERROR] - Error 404 on route /tickets/v1",
+                    statusCode: 404
+                })
+                
+                return
+            }
 
             reply.status(200).send({
                 data: tickets,
