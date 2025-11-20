@@ -11,16 +11,15 @@ const TestDataBaseConnection = async() => {
         database: "postgres",
         user: process.env.POSTGRES_USER as string,
         password: process.env.POSTGRES_PASSWORD as string,
-        port: 5432
+        port: process.env.DATABASE_PORTS_POSTGRES as number | undefined
     })
 
     try{
         console.log("Testing database connection...")
         await client.connect()
 
-        const result = await client.query('SELECT version()')
         console.log(`✅ Succesfully to connect database`)
-    
+
         return true
     }catch(e){
         console.error(`❌ [ERROR] - Error to connect on Database: ${e}`)
