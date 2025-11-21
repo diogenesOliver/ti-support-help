@@ -5,6 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Company {
@@ -50,6 +51,7 @@ model Ticket {
   ticket_code     String
   ticket_desc     String  @db.VarChar(255)
   ticket_foto     String? @db.VarChar(500)
+  ticket_status   Boolean @default(false)
   employeed_email String
   employeed_name  String
   lead            String
