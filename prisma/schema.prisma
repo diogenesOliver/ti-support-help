@@ -31,7 +31,7 @@ model Company {
 model Collaborator {
   id           String @id @default(uuid())
   colab_name   String
-  colab_email  String
+  colab_email  String @unique
   colab_lead   String
   colab_sector String
 
