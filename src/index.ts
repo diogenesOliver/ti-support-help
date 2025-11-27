@@ -1,7 +1,7 @@
 import fastify, { FastifyInstance } from "fastify";
 
 import { openSupportTicket } from './use_cases/open-support-ticket'
-import { consumerMessage } from './use_cases/get-tickets'
+import { consumerMessage } from './use_cases/collaborators'
 import { companyRegistration } from "./use_cases/company-registration"
 import { associatedCollaborator } from "./use_cases/associate-collaborator"
 

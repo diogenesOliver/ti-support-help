@@ -10,7 +10,7 @@ export const consumerMessage = async (app: FastifyInstance) => {
             const paramsValidation = z.object({ id: z.string().uuid() }) 
             const { id } = paramsValidation.parse(request.params)
             
-            const tickets = await findQuerie("collaborator", id, "Ticket")
+            const tickets = await findQuerie("company", id, "collaborator", "Ticket")
             if(tickets == undefined){
                 reply.status(404).send({
                     error: "[ERROR] - Error 404 on route /tickets/v1",
