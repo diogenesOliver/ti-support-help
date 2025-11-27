@@ -20,6 +20,8 @@ model Company {
   corporate_website_link String?
   corporate_token        String?
 
+  corporate_first_access Boolean @default(false)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
