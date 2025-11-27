@@ -1,7 +1,7 @@
 import fastify, { FastifyInstance } from "fastify";
 
 import { openSupportTicket } from './use_cases/open-support-ticket'
-import { consumerMessage } from './use_cases/collaborators'
+import { colaborators } from './use_cases/collaborators'
 import { companyRegistration } from "./use_cases/company-registration"
 import { associatedCollaborator } from "./use_cases/associate-collaborator"
 
@@ -12,7 +12,7 @@ app.register(
 )
 
 app.register(openSupportTicket)
-app.register(consumerMessage)
+app.register(colaborators)
 app.register(companyRegistration)
 app.register(associatedCollaborator)
 
