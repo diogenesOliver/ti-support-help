@@ -5,10 +5,10 @@ type UrlParamIdTyping = string | undefined
 export async function insertQuerie(tableName: string, data: object, argumentName?: string, paramUrlId?: UrlParamIdTyping): Promise<object | undefined> {
     try{
         if(paramUrlId == undefined || argumentName == undefined){
-            await prismaClient[tableName].create({
+            const result = await prismaClient[tableName].create({
                 data: data
             })
-            return data
+            return result
         }
 
         let relationData
@@ -21,14 +21,14 @@ export async function insertQuerie(tableName: string, data: object, argumentName
             relationData = { [argumentName]: paramUrlId }
         }
 
-        await prismaClient[tableName].create({
+        const result = await prismaClient[tableName].create({
             data: {
                 ...data,
                 ...relationData
             }
         })
 
-        return data
+        return result
     }catch(e){
         console.error(`[ERROR] - INSERT QUERIE ERROR: ${e}`)
         return undefined
