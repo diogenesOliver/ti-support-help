@@ -2,14 +2,20 @@ import { prismaClient } from "../PrismaInstance"
 
 type UrlParamIdTyping = string | undefined
 
-export async function insertQuerie(tableName: string, data: object, argumentName?: string, paramUrlId?: UrlParamIdTyping): Promise<object | undefined> {
+interface IArgumentOptions {
+    argumentName?: string | undefined,
+    paramUrlId?: UrlParamIdTyping
+}
+export async function insertQuerie(tableName: string, data: object, options?: IArgumentOptions): Promise<object | undefined> {
     try{
-        if(paramUrlId == undefined || argumentName == undefined){
+        if(!options){
             const result = await prismaClient[tableName].create({
                 data: data
             })
             return result
         }
+
+        const { argumentName, paramUrlId } = options
 
         let relationData
 
@@ -18,6 +24,7 @@ export async function insertQuerie(tableName: string, data: object, argumentName
         }else if(argumentName === 'collaborator' || argumentName === 'collaboratorId'){
             relationData = { collaborator: { connect: { id: paramUrlId } } }
         }else{
+            //@ts-ignore
             relationData = { [argumentName]: paramUrlId }
         }
 
