@@ -6,17 +6,15 @@ interface IArgumentOptions {
     argumentName?: string | undefined,
     paramUrlId?: UrlParamIdTyping
 }
-export async function insertQuerie(tableName: string, data: object, options?: IArgumentOptions): Promise<object | undefined> {
+export async function insertQuerie(tableName: string, data: object, argumentName?: string, paramUrlId?: UrlParamIdTyping): Promise<object | undefined> {
     try{
-        if(!options){
+        if(paramUrlId == undefined || argumentName == undefined){
             const result = await prismaClient[tableName].create({
                 data: data
             })
             return result
         }
-
-        const { argumentName, paramUrlId } = options
-
+        
         let relationData
 
         if(argumentName === 'company' || argumentName === 'companyId'){
