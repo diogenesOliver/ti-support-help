@@ -7,7 +7,7 @@ import { KafkaInstance } from "../lib/kafka";
 import { generateTokenConsumer } from "../consumer/kafka_consumer/generate_token_consumer";
 
 import { FastifyInstance } from "fastify";
-import { string, z } from "zod"
+import { z } from "zod"
 
 export async function companyRegistration(app: FastifyInstance){
     app.post('/company/registration/v1', async (request, reply) => {
@@ -19,6 +19,9 @@ export async function companyRegistration(app: FastifyInstance){
             await producer.connect()
 
             const registrationCoorporate = await insertQuerie("company", companyData)
+            //@ts-ignore
+            const uuid = JSON.stringify(registrationCoorporate?.id)
+
             if (registrationCoorporate == undefined){
                 reply.status(404).send({
                         message: {
@@ -40,7 +43,7 @@ export async function companyRegistration(app: FastifyInstance){
             })
 
             await producer.disconnect()
-            generateTokenConsumer()
+            generateTokenConsumer(uuid)
 
             reply.status(200).send({
                 message: `Validation TOKEN sended from company email: ${companyData.corporate_email as string}`,
