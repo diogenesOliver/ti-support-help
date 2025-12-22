@@ -4,24 +4,25 @@ config()
 import { KafkaInstance } from "../../lib/kafka";
 import { sign } from "jsonwebtoken"
 
-export async function generateTokenConsumer(){
+export async function generateTokenConsumer(uuid?: string){
     const consumer = KafkaInstance.consumer({ groupId: "generateToken-group" })
 
     try{
+        const TOKEN: string = token()
+        
         await consumer.connect()
         await consumer.subscribe({ topic: "topic-test", fromBeginning: true })
 
-        console.info("✅ CONSUMER INSCRITO NO TÓPICO")
-        const TOKEN: string = token()
-
         await consumer.run({
             eachMessage: async ({ topic, partition, message, heartbeat }) => {
-
                 /* 
-                    Aplicar lógica para envio de token para email 
+                    Lógica aplicável para enviar o token para o email da empresa
                 */
-
-                console.log({ TOKEN })
+                
+                console.log({
+                    message: "Successfully send token from company email",
+                    token: TOKEN
+                })
                 await heartbeat()
             }
         })
@@ -31,5 +32,7 @@ export async function generateTokenConsumer(){
 }
 
 function token(): string{
-    return sign({ foo: "baar" }, String(process.env.SECRET_KEY_FROM_TOKEN))
+    return sign({
+        foo: "baar"
+    }, String(process.env.SECRET_KEY_FROM_TOKEN))
 }
