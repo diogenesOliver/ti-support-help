@@ -3,8 +3,9 @@ config()
 
 import { Domain_Company_Data } from "../domain/ApplicationDomainLayer"
 import { insertQuerie } from "../db/queries/insert-querie";
+import { updateQuerie } from "../db/queries/update-querie";
 import { KafkaInstance } from "../lib/kafka";
-import { generateTokenConsumer } from "../consumer/kafka_consumer/generate_token_consumer";
+import { generateTokenConsumer, token } from "../consumer/kafka_consumer/generate_token_consumer";
 
 import { FastifyInstance } from "fastify";
 import { z } from "zod"
@@ -19,8 +20,14 @@ export async function companyRegistration(app: FastifyInstance){
             await producer.connect()
 
             const registrationCoorporate = await insertQuerie("company", companyData)
+            console.log(registrationCoorporate)
+
             //@ts-ignore
             const uuid = JSON.stringify(registrationCoorporate?.id)
+            
+            const jwtToken = token()
+            //@ts-ignore
+            await updateQuerie("company", registrationCoorporate?.id, "corporate_token", jwtToken)
 
             if (registrationCoorporate == undefined){
                 reply.status(404).send({
@@ -43,7 +50,7 @@ export async function companyRegistration(app: FastifyInstance){
             })
 
             await producer.disconnect()
-            generateTokenConsumer(uuid)
+            generateTokenConsumer()
 
             reply.status(200).send({
                 message: `Validation TOKEN sended from company email: ${companyData.corporate_email as string}`,

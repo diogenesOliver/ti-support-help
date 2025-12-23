@@ -4,7 +4,7 @@ config()
 import { KafkaInstance } from "../../lib/kafka";
 import { sign } from "jsonwebtoken"
 
-export async function generateTokenConsumer(uuid?: string){
+export async function generateTokenConsumer(){
     const consumer = KafkaInstance.consumer({ groupId: "generateToken-group" })
 
     try{
@@ -31,7 +31,7 @@ export async function generateTokenConsumer(uuid?: string){
     }   
 }
 
-function token(): string{
+export function token(): string{
     return sign({
         foo: "baar"
     }, String(process.env.SECRET_KEY_FROM_TOKEN))
