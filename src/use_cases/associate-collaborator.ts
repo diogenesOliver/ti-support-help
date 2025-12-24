@@ -32,7 +32,7 @@ export async function associatedCollaborator(app: FastifyInstance){
         }catch(e){
             if( JSON.parse( e.message )[0].code == "invalid_string" ){
                 reply.status(400).send({
-                    error: `Invlaid <<paramId>>! Try again`,
+                    error: `Invlaid ${request.params}! Try again`,
                     statusCode: 400
                 })
             
