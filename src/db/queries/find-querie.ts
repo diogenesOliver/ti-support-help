@@ -29,3 +29,30 @@ export async function findQuerie(tableName: string, uuidParams?: ArgumentsType, 
         return undefined
     }
 }
+
+type TokenValidationResult = {
+    querieStatus: boolean;
+    message?: {
+        companyData: any;
+    };
+};
+
+export async function findCoorporateTokenFromValidationFeature(tableName: string, token: string): Promise<TokenValidationResult | undefined>{
+    try{
+        const results = await prismaClient[tableName].findUnique({
+            where: { corporate_token: token } 
+        })
+
+        if (results == null)
+            return { querieStatus: false }
+
+        return {
+            querieStatus: true,
+            message: {
+                companyData: results
+            }
+        }
+    }catch(e){
+        console.error(`[ERROR] - FIND UNIQUE TOKEN FROM VALIDATION ERROR: ${e}`)
+    }
+}
