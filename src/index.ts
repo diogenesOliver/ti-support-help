@@ -4,6 +4,7 @@ import { openSupportTicket } from './use_cases/open-support-ticket'
 import { colaborators } from './use_cases/collaborators'
 import { companyRegistration } from "./use_cases/company-registration"
 import { associatedCollaborator } from "./use_cases/associate-collaborator"
+import { companyTokenValidation } from "./use_cases/token-validation";
 
 const app: FastifyInstance = fastify()
 
@@ -15,5 +16,6 @@ app.register(openSupportTicket)
 app.register(colaborators)
 app.register(companyRegistration)
 app.register(associatedCollaborator)
+app.register(companyTokenValidation)
 
 export = app
