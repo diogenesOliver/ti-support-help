@@ -6,7 +6,6 @@ import { FastifyInstance } from "fastify"
 export const companyTokenValidation = async (app: FastifyInstance) => {
     app.post('/token/validation', async (request, reply) => {
         try{
-            const token = ""
             const tokenRequired = request.body
             
             // @ts-ignore
@@ -23,7 +22,7 @@ export const companyTokenValidation = async (app: FastifyInstance) => {
             return reply.status(201).send({
                 message: "Succesfully token validation",
                 statusCode: 201,
-                token: token
+                token: tokenRequired
             })
         }catch(e){
             console.log(`[ROUTE - /token/validation] - ${e}`)
