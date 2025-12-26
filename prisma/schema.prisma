@@ -18,7 +18,7 @@ model Company {
   corporate_city         String
   corporate_street       String
   corporate_website_link String?
-  corporate_token        String?
+  corporate_token        String? @unique
 
   corporate_first_access Boolean @default(false)
 
