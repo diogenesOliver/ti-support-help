@@ -1,6 +1,6 @@
 import { prismaClient } from "../PrismaInstance";
 
-export async function updateQuerie(tableName: string, uuidUser: string, fieldUpdate: string, token: string){
+export async function updateQuerie(tableName: string, uuidUser: string, fieldUpdate: string, valueUpdated: string | boolean){
     try{
         const existingRecord = await (prismaClient as any)[tableName].findUnique({
             where: { id: uuidUser }
@@ -14,7 +14,7 @@ export async function updateQuerie(tableName: string, uuidUser: string, fieldUpd
         const result = await (prismaClient as any)[tableName].update({
             where: { id: uuidUser },
             data: {
-                [fieldUpdate]: token
+                [fieldUpdate]: valueUpdated
             }
         });
         
